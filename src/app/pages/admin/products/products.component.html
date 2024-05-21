@@ -1,0 +1,104 @@
+
+<div class="row">
+    <div [ngClass]="isSidePanlVisible? 'col-8':'col-12'" >
+        <div class="card">
+             <div class="card-header bg-primary">
+                <div class="row">
+                    <div class="col-6">
+                        Product List
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-sm btn-success" (click)="open()">New</button>
+                    </div>
+                 </div>
+            </div>
+           
+            <div class="row">
+            <div *ngFor="let pro of proList" class="col-lg-6 col-xl-4">
+                <div class="p-4 rounded bg-light">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <img class="card-img-top" src="../assets/img/{{pro.productImgUrl.substr(12)}}" alt="Card image">
+                            <p class="card-text">{{pro.description}}</p>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="h5">{{pro.name}}</a>
+                            <div class="d-flex my-3">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="mb-3">{{pro.price}} $</h4>
+                            <a  class="btn btn-primary" (click)="editPro(pro)">Edit</a>
+                              <a (click)="onDelet(pro)" class="btn btn-danger mx2">Delete</a>
+                              
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+     </div>
+     <div class="col-4" *ngIf="isSidePanlVisible" >
+        <div class="card">
+             <div class="card-header bg-primary">
+                <div class="row">
+                    <div class="col-6">
+                        New Product 
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-sm btn-success"(click)="close()">Close</button>
+                    </div>
+                 </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    
+                    
+                        <label for="">Name</label>
+                        <input type="text" [(ngModel)]="productObject.name" class="form-control">
+                  
+                </div>
+                <div class="row">
+                    
+                        <label for="">Price</label>
+                        <input type="text"[(ngModel)]="productObject.price" class="form-control">
+                    
+                    
+                </div>
+                <div class="row">
+                    
+                        <label for="">Category</label>
+                        <select [(ngModel)]="productObject.category" class="form-select">
+                            <option *ngFor="let cate of categoryList" [value]="cate.categoryName">{{cate.categoryName}}</option>
+                        </select>
+                       
+                    
+                    
+                </div>
+                <div class="row">
+                   
+                        <label for="">Image Url</label>
+                        <input type="file"[(ngModel)]="productObject.productImgUrl" class="form-control">
+                    
+                </div>
+                <div class="row">
+                   
+                    <label for="">Product Description</label>
+                    <input type="text"[(ngModel)]="productObject.description" class="form-control">
+                
+                </div>
+                <div class="row">
+                    
+                    
+                        <button class="btn btn-success"*ngIf="productObject.sku==0" style="margin-top: 5%;" (click)="onSave()">Create Product</button>
+                    
+                        <button class="btn btn-primary"*ngIf="productObject.sku!==0"style="margin-top: 5%;"(click)="update()">Update Product</button>
+                    
+                </div>
+            </div>
+        </div>
+     </div>
+</div>
